@@ -1,5 +1,7 @@
 # Infinario PHP SDK
 
+![](https://travis-ci.org/Infinario/php-sdk.svg)
+
 The `\Infinario\Infinario` class provides access to the Infinario PHP tracking API.
 The SDK requires PHP >= 5.3.2 and php5-curl.
 
