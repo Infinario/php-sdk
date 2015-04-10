@@ -43,6 +43,7 @@ class Infinario extends InfinarioClientBase
                 }
                 return;
             }
+            $logger = $options['logger'];
         }
 
         $customer = null;
@@ -50,7 +51,7 @@ class Infinario extends InfinarioClientBase
             $customer = $options['customer'];
         }
 
-        parent::__construct(new Environment($debug), $customer);
+        parent::__construct(new Environment($debug, $logger), $customer);
 
         $target = null;
         if (array_key_exists('target', $options)) {
