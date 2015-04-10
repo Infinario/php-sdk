@@ -1,6 +1,7 @@
 # Infinario PHP SDK
 
 The `\Infinario\Infinario` class provides access to the Infinario PHP tracking API.
+The SDK requires PHP >= 5.3.2 and php5-curl.
 
 ## Installation
 
@@ -55,7 +56,7 @@ You can also specify an array of event properties to store
 with the event.
 
 ```php
-$infinario->track('purchase', array('product' => 'bottle', 'amount' => 5));
+$infinario->track('purchase', ['product' => 'bottle', 'amount' => 5]);
 ```
 
 ## Updating customer properties
@@ -63,5 +64,5 @@ $infinario->track('purchase', array('product' => 'bottle', 'amount' => 5));
 You can also update information that is stored with a customer.
 
 ```php
-$infinario->update(array('first_name' => 'John', 'last_name' => 'Smith'));
+$infinario->update(['first_name' => 'John', 'last_name' => 'Smith']);
 ```
