@@ -1,0 +1,15 @@
+{
+  "name": "infinario/infinario",
+  "autoload": {
+    "psr-4": {
+      "Infinario\\": "lib/"
+    }
+  },
+  "require": {
+    "ext-curl": "*"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "2.*",
+    "phpunit/phpunit": "4.*"
+  }
+}
