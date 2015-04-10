@@ -16,7 +16,7 @@ class SynchronousTransport implements Transport
             return false;
         }
         $payload = json_encode($payload);
-        $environment->debug('posting to ' . $url, $payload);
+        $environment->debug('posting to ' . $url, array('body' => $payload));
         $headers = array('Content-Type:application/json');
         if (curl_setopt($ch, CURLOPT_POSTFIELDS, $payload) === false) {
             $environment->exception(new Exception('failed setting payload'));
