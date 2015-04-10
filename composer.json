@@ -1,5 +1,19 @@
 {
   "name": "infinario/infinario",
+  "description": "Infinario PHP SDK",
+  "keywords": [
+    "player analytics",
+    "analytics",
+    "events",
+    "tracking"
+  ],
+  "homepage": "https://github.com/infinario/php-sdk",
+  "license": "Apache-2.0",
+  "support": {
+    "email": "support@infinario.com",
+    "issues": "https://github.com/infinario/php-sdk/issues",
+    "source": "https://github.com/Infinario/php-sdk"
+  },
   "autoload": {
     "psr-4": {
       "Infinario\\": "lib/"
