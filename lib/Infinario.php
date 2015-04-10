@@ -22,6 +22,7 @@ class Infinario extends InfinarioClientBase
      *                        'transport' => new \Infinario\NullTransport() // transport that does not send anything
      *                        'debug' => false // default, suppresses throwing of exceptions
      *                        'debug' => true // raises Exceptions on errors
+     *                        'logger' => PSR-3 logger (a Psr\Log\LoggerInterface instance)
      * @throws Exception if an error is encountered and debug option is true
      */
     public function __construct($token, array $options = array())
@@ -30,6 +31,17 @@ class Infinario extends InfinarioClientBase
         if (array_key_exists('debug', $options)) {
             if ($options['debug']) {
                 $debug = true;
+            }
+        }
+
+        $logger = null;
+        if (array_key_exists('logger', $options)) {
+            $loggerClass = 'Psr\\Log\\LoggerInterface';
+            if (!($options['logger'] instanceof $loggerClass)) {
+                if ($debug) {
+                    throw new Exception('logger must be an instance of Psr\\Log\\LoggerInterface');
+                }
+                return;
             }
         }
 

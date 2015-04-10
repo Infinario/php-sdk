@@ -10,27 +10,26 @@ class SynchronousTransport implements Transport
 
     public function post(Environment $environment, $url, $payload)
     {
-        $environment->debug('url', $url);
         $ch = curl_init($url);
         if ($ch === false) {
-            $environment->debug('Failed to init curl handle');
+            $environment->exception(new Exception('Failed to init curl handle'));
             return false;
         }
         $payload = json_encode($payload);
-        $environment->debug('payload', $payload);
+        $environment->debug('posting to ' . $url, $payload);
         $headers = array('Content-Type:application/json');
         if (curl_setopt($ch, CURLOPT_POSTFIELDS, $payload) === false) {
-            $environment->debug('failed setting payload');
+            $environment->exception(new Exception('failed setting payload'));
             curl_close($ch);
             return false;
         }
         if (curl_setopt($ch, CURLOPT_HTTPHEADER, $headers) === false) {
-            $environment->debug('failed setting headers');
+            $environment->exception(new Exception('failed setting headers'));
             curl_close($ch);
             return false;
         }
         if (curl_setopt($ch, CURLOPT_RETURNTRANSFER, true) === false) {
-            $environment->debug('failed setting returntransfer');
+            $environment->exception(new Exception('failed setting returntransfer'));
             curl_close($ch);
             return false;
         }
