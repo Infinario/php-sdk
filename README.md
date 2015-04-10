@@ -25,7 +25,7 @@ $infinario = new Infinario('12345678-90ab-cdef-1234-567890abcdef');             
 ```
 
 Setting debug to true disables suppresion of exceptions so that it is easier to spot errors when developing.
-You can also provide a (PSR-3)[https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md]
+You can also provide a [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md)
 compliant logger interface:
 
 ```php
