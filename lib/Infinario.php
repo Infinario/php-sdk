@@ -13,16 +13,16 @@ class Infinario extends InfinarioClientBase
 
     /**
      *
-     * @param string $token your API token
-     * @param array $options An array of options (since PHP does not support named arguments):
-     *                       'customer' => 'john123' // registered ID = 'john123'
-     *                       'customer' => ['registered' => 'john123'] // same as above
-     *                       'target' => 'https://api.infinario.com' // which API server to use
-     *                       'transport' => new \Infinario\SynchronousTransport() // default transport
-     *                       'transport' => new \Infinario\NullTransport() // transport that does not send anything
-     *                       'debug' => false // default, suppresses throwing of exceptions
-     *                       'debug' => true // raises Exceptions on errors
-     * @throws Exception
+     * @param string $token   your API token
+     * @param array  $options An array of options (since PHP does not support named arguments):
+     *                        'customer' => 'john123' // registered ID = 'john123'
+     *                        'customer' => ['registered' => 'john123'] // same as above
+     *                        'target' => 'https://api.infinario.com' // which API server to use
+     *                        'transport' => new \Infinario\SynchronousTransport() // default transport
+     *                        'transport' => new \Infinario\NullTransport() // transport that does not send anything
+     *                        'debug' => false // default, suppresses throwing of exceptions
+     *                        'debug' => true // raises Exceptions on errors
+     * @throws Exception if an error is encountered and debug option is true
      */
     public function __construct($token, array $options = array())
     {
