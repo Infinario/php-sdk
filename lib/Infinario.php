@@ -28,7 +28,9 @@ class Infinario extends InfinarioClientBase
     {
         $debug = false;
         if (array_key_exists('debug', $options)) {
-            if ($options['debug']) $debug = true;
+            if ($options['debug']) {
+                $debug = true;
+            }
         }
 
         $customer = null;
