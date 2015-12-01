@@ -117,7 +117,7 @@ class InfinarioTest extends \PHPUnit_Framework_TestCase {
         $transport = $this->getMockBuilder('Infinario\Transport')->getMock();
 
         $transport->expects($this->once())
-            ->method('postAndForget')
+            ->method('post')
             ->with($this->anything(), $this->equalTo('http://api.infinario.com/crm/events'), $this->equalTo(array(
                 'customer_ids' => array('registered' => 12),
                 'company_id' => '12345678-90ab-cdef-1234-567890abcdef',
@@ -135,7 +135,7 @@ class InfinarioTest extends \PHPUnit_Framework_TestCase {
         $transport = $this->getMockBuilder('Infinario\Transport')->getMock();
 
         $transport->expects($this->once())
-            ->method('postAndForget')
+            ->method('post')
             ->with($this->anything(), $this->equalTo('https://api.infinario.com/crm/events'), $this->equalTo(array(
                 'customer_ids' => array('registered' => 12),
                 'company_id' => '12345678-90ab-cdef-1234-567890abcdef',
@@ -178,7 +178,7 @@ class InfinarioTest extends \PHPUnit_Framework_TestCase {
         $transport = $this->getMockBuilder('Infinario\Transport')->getMock();
 
         $transport->expects($this->once())
-            ->method('postAndForget')
+            ->method('post')
             ->with($this->anything(), $this->equalTo('http://api.infinario.com/crm/customers'), $this->equalTo(array(
                 'ids' => array('registered' => 12),
                 'company_id' => '12345678-90ab-cdef-1234-567890abcdef',
@@ -195,7 +195,7 @@ class InfinarioTest extends \PHPUnit_Framework_TestCase {
         $transport = $this->getMockBuilder('Infinario\Transport')->getMock();
 
         $transport->expects($this->once())
-            ->method('postAndForget')
+            ->method('post')
             ->with($this->anything(), $this->equalTo('https://api.infinario.com/crm/customers'), $this->equalTo(array(
                 'ids' => array('registered' => 12),
                 'company_id' => '12345678-90ab-cdef-1234-567890abcdef',

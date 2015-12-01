@@ -34,6 +34,14 @@ compliant logger interface:
 $infinario = new Infinario('12345678-90ab-cdef-1234-567890abcdef', ['logger' => $logger]);
 ```
 
+
+Timeout for sending data is set to 1000ms you can overwrite it by following option:
+
+```php
+$infinario = new Infinario('12345678-90ab-cdef-1234-567890abcdef', ['timeout' => 500]);
+```
+
+
 ## Identifying the customer
 
 When tracking events, you have to specify which customer generated

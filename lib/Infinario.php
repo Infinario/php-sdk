@@ -5,10 +5,11 @@ class Infinario extends InfinarioClientBase
 {
 
     const DEFAULT_TARGET = 'https://api.infinario.com';
-
+    const DEFAULT_TIMEOUT = 1000;
     private $_initialized = false;
     private $_transport = null;
     private $_target = Infinario::DEFAULT_TARGET;
+    private $_timeout = Infinario::DEFAULT_TIMEOUT;
     protected $token = null;
 
     /**
@@ -58,6 +59,10 @@ class Infinario extends InfinarioClientBase
             $target = $options['target'];
         }
 
+        if (array_key_exists('timeout', $options)) {
+            $this->_timeout = $options['timeout'];
+        }
+
         $transport = null;
         if (array_key_exists('transport', $options)) {
             $transport = $options['transport'];
@@ -93,12 +98,12 @@ class Infinario extends InfinarioClientBase
         $this->_initialized = true;
     }
 
-    protected function url($path) 
+    protected function url($path)
     {
         return $this->_target . $path;
     }
 
-    protected function doTrack($eventType, array $properties, $timestamp) 
+    protected function doTrack($eventType, array $properties, $timestamp)
     {
         if (!$this->_initialized) {
             $this->environment->exception(new Exception("Trying to use uninitialized Infinario"));
@@ -115,10 +120,10 @@ class Infinario extends InfinarioClientBase
         if ($timestamp !== null) {
             $event['timestamp'] = $timestamp;
         }
-        $this->_postAndForget('/crm/events', $event);
+        return $this->_post('/crm/events', $event);
     }
 
-    public function update($properties) 
+    public function update($properties)
     {
         if (!$this->_initialized) {
             $this->environment->exception(new Exception("Trying to use uninitialized Infinario"));
@@ -135,17 +140,16 @@ class Infinario extends InfinarioClientBase
             'company_id' => $this->token,
             'properties' => $properties
         );
-        $this->_postAndForget('/crm/customers', $data);
+        return $this->_post('/crm/customers', $data);
     }
 
     private function _post($path, $payload)
     {
-        return $this->_transport->post($this->environment, $this->url($path), $payload);
+        return $this->_transport->post($this->environment, $this->url($path), $payload, $this->_timeout);
     }
 
     private function _postAndForget($path, $payload)
     {
         $this->_transport->postAndForget($this->environment, $this->url($path), $payload);
     }
-
 }

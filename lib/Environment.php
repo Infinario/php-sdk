@@ -29,7 +29,6 @@ class Environment
             if ($this->_logger !== null) {
                 $this->_logger->error($exception->getMessage(), array('exception' => $exception));
             }
-            return;
         }
         throw $exception;
     }
