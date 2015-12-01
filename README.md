@@ -26,13 +26,20 @@ $infinario = new Infinario('12345678-90ab-cdef-1234-567890abcdef');             
 // $infinario = new Infinario('12345678-90ab-cdef-1234-567890abcdef', ['debug' => true]); // DEVELOPMENT ENVIRONMENT
 ```
 
-Setting debug to true disables suppresion of exceptions so that it is easier to spot errors when developing.
 You can also provide a [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md)
 compliant logger interface:
 
 ```php
 $infinario = new Infinario('12345678-90ab-cdef-1234-567890abcdef', ['logger' => $logger]);
 ```
+
+
+Timeout for sending data is set to 1000ms you can overwrite it by following option:
+
+```php
+$infinario = new Infinario('12345678-90ab-cdef-1234-567890abcdef', ['timeout' => 500]);
+```
+
 
 ## Identifying the customer
 

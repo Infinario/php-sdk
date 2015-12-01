@@ -71,6 +71,6 @@ abstract class InfinarioClientBase
             $this->environment->exception(new Exception('Customer ID is required before tracking events'));
             return;
         }
-        $this->doTrack($eventType, $properties, $timestamp);
+        return $this->doTrack($eventType, $properties, $timestamp);
     }
 }

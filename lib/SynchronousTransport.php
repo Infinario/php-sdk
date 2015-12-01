@@ -3,12 +3,12 @@ namespace Infinario;
 
 class SynchronousTransport implements Transport
 {
-    public function postAndForget(Environment $environment, $url, $payload)
+    public function postAndForget(Environment $environment, $url, $payload, $timeout = Infinario::DEFAULT_TIMEOUT)
     {
-        $this->post($environment, $url, $payload);
+        $this->post($environment, $url, $payload, $timeout);
     }
 
-    public function post(Environment $environment, $url, $payload)
+    public function post(Environment $environment, $url, $payload, $timeout = Infinario::DEFAULT_TIMEOUT)
     {
         $ch = curl_init($url);
         if ($ch === false) {
@@ -19,21 +19,27 @@ class SynchronousTransport implements Transport
         $environment->debug('posting to ' . $url, array('body' => $payload));
         $headers = array('Content-Type:application/json');
         if (curl_setopt($ch, CURLOPT_POSTFIELDS, $payload) === false) {
-            $environment->exception(new Exception('failed setting payload'));
             curl_close($ch);
-            return false;
+            $environment->exception(new Exception('failed setting payload'));
         }
         if (curl_setopt($ch, CURLOPT_HTTPHEADER, $headers) === false) {
-            $environment->exception(new Exception('failed setting headers'));
             curl_close($ch);
-            return false;
+            $environment->exception(new Exception('failed setting headers'));
         }
         if (curl_setopt($ch, CURLOPT_RETURNTRANSFER, true) === false) {
-            $environment->exception(new Exception('failed setting returntransfer'));
             curl_close($ch);
-            return false;
+            $environment->exception(new Exception('failed setting returntransfer'));
         }
+        if (curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout) === false) {
+            curl_close($ch);
+            $environment->exception(new Exception('failed setting timeout'));
+        }
+
         $result = curl_exec($ch);
+        if ($result === false) {
+            $environment->exception(new Exception(curl_error($ch)));
+        }
+
         curl_close($ch);
         return $result;
     }
