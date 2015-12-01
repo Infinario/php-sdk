@@ -39,6 +39,9 @@ class InfinarioTest extends \PHPUnit_Framework_TestCase {
         new Infinario('12345678-90ab-cdef-1234-567890abcdef', array('debug' => true, 'transport' => null));
     }
 
+    /**
+     * @expectedException              Infinario\Exception
+     */
     public function testConstructTransportCheckInvalidProduction()
     {
         new Infinario('12345678-90ab-cdef-1234-567890abcdef', array('debug' => false, 'transport' => 'xxx'));
@@ -49,6 +52,9 @@ class InfinarioTest extends \PHPUnit_Framework_TestCase {
         new Infinario('12345678-90ab-cdef-1234-567890abcdef', array('debug' => true, 'transport' => 'xxx'));
     }
 
+    /**
+     * @expectedException              Infinario\Exception
+     */
     public function testConstructTokenCheckInvalidProduction()
     {
         new Infinario(123);
@@ -60,6 +66,9 @@ class InfinarioTest extends \PHPUnit_Framework_TestCase {
         new Infinario(123, array('debug' => true));
     }
 
+    /**
+     * @expectedException              Infinario\Exception
+     */
     public function testConstructTargetCheckInvalidTypeProduction()
     {
         new Infinario('12345678-90ab-cdef-1234-567890abcdef', array('debug' => false, 'target' => 123));
@@ -70,6 +79,9 @@ class InfinarioTest extends \PHPUnit_Framework_TestCase {
         new Infinario('12345678-90ab-cdef-1234-567890abcdef', array('debug' => true, 'target' => 123));
     }
 
+    /**
+     * @expectedException              Infinario\Exception
+     */
     public function testConstructTargetCheckInvalidProduction()
     {
         new Infinario('12345678-90ab-cdef-1234-567890abcdef', array('debug' => false, 'target' => 'host.name'));
@@ -101,6 +113,10 @@ class InfinarioTest extends \PHPUnit_Framework_TestCase {
         $i->track('test');
     }
 
+    /**
+     * @expectedException              Infinario\Exception
+     * @expectedExceptionMessageRegExp #Customer ID is required.*#
+     */
     public function testTrackEventNoIdsProduction() {
         $transport = $this->getMockBuilder('Infinario\Transport')->getMock();
 
@@ -162,6 +178,10 @@ class InfinarioTest extends \PHPUnit_Framework_TestCase {
         $i->update(array("first_name" => "value"));
     }
 
+    /**
+     * @expectedException              Infinario\Exception
+     * @expectedExceptionMessageRegExp #Customer ID is required.*#
+     */
     public function testUpdateCustomerNoIdsProduction() {
         $transport = $this->getMockBuilder('Infinario\Transport')->getMock();
 
