@@ -3,6 +3,13 @@ namespace Infinario;
 
 class SynchronousTransport implements Transport
 {
+    public $verifyCert = true;
+
+    public function __construct($verifyCert = true)
+    {
+        $this->verifyCert = (boolean)$verifyCert;
+    }
+
     public function postAndForget(Environment $environment, $url, $payload, $timeout = Infinario::DEFAULT_TIMEOUT)
     {
         $this->post($environment, $url, $payload, $timeout);
@@ -33,6 +40,16 @@ class SynchronousTransport implements Transport
         if (curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout) === false) {
             curl_close($ch);
             $environment->exception(new Exception('failed setting timeout'));
+        }
+        if (!$this->verifyCert) {
+            if (curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false) === false) {
+                curl_close($ch);
+                $environment->exception(new Exception('failed setting verifyhost'));
+            }
+            if (curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false) === false) {
+                curl_close($ch);
+                $environment->exception(new Exception('failed setting verifypeer'));
+            }
         }
 
         $result = curl_exec($ch);
