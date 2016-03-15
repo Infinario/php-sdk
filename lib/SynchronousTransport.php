@@ -42,7 +42,7 @@ class SynchronousTransport implements Transport
             $environment->exception(new Exception('failed setting timeout'));
         }
         if (!$this->verifyCert) {
-            if (curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false) === false) {
+            if (curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0) === false) {
                 curl_close($ch);
                 $environment->exception(new Exception('failed setting verifyhost'));
             }
