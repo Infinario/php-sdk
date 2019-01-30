@@ -29,7 +29,7 @@ abstract class InfinarioClientBase
 
     protected function convertMapping($val)
     {
-        if ($val === null || count($val) == 0) {
+        if (empty($val) || (is_array($val) && count($val) == 0)) {
             return new \stdClass;
         }
         return $val;
